@@ -1,5 +1,6 @@
 
 #include <sail/net/poller.h>
+#include <sail/net/channel.h>
 
 using namespace sail;
 

@@ -1,5 +1,6 @@
 
 #include <sail/net/eventloop.h>
+#include <sail/net/channel.h>
 #include <sail/net/poller.h>
 
 using namespace sail;
@@ -46,6 +47,11 @@ void EventLoop::loop()
 void EventLoop::quit()
 {
 	_quit = true;
+}
+
+void EventLoop::removeChannel(Channel *channel)
+{
+
 }
 
 void EventLoop::_processActiveChannels()

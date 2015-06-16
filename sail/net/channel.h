@@ -3,6 +3,7 @@
 #define _SAIL_CHANNEL_H
 
 #include <sail/base/noncopyable.h>
+#include <sail/base/timestamp.h>
 
 namespace sail
 {
@@ -24,13 +25,13 @@ public:
 	Channel(EventLoop *loop, int fd);
 	~Channel();
 
-	void setReadCallback(const ReadEventCallback *cb)
+	void setReadCallback(ReadEventCallback * cb)
   	{ _readCallback = cb; }
-  	void setWriteCallback(const EventCallback *cb)
+  	void setWriteCallback(EventCallback *cb)
   	{ _writeCallback = cb; }
-  	void setCloseCallback(const EventCallback *cb)
+  	void setCloseCallback(EventCallback *cb)
   	{ _closeCallback = cb; }
-  	void setErrorCallback(const EventCallback *cb)
+  	void setErrorCallback(EventCallback *cb)
   	{ _errorCallback = cb; }
 
 
@@ -68,7 +69,6 @@ private:
 	EventCallback *_writeCallback;
 	EventCallback *_closeCallback;
 	EventCallback *_errorCallback;
-
 
 };
 

@@ -24,6 +24,8 @@ public:
 
 	void quit();
 
+    void removeChannel(Channel *channel);
+
 private:
 	void _processActiveChannels();
 

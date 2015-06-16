@@ -3,6 +3,7 @@
 #define _SAIL_CALLBACKS_H
 
 #include <stddef.h>
+#include <sail/base/timestamp.h>
 
 namespace sail
 {
@@ -16,7 +17,7 @@ typedef void CloseCallback(const TcpConnection*);
 typedef void WriteCompleteCallback(const TcpConnection*);
 typedef void HighWaterMarkCallback(const TcpConnection*, size_t);
 
-typedef void HighWaterMarkCallback(const TcpConnection*, Buffer*, Timestamp);
+typedef void MessageCallback(const TcpConnection*, Buffer*, Timestamp);
 
 }
 

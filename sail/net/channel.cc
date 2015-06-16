@@ -1,5 +1,6 @@
 
 #include <sail/net/channel.h>
+#include <sail/net/eventloop.h>
 
 #include <poll.h>
 #include <stdlib.h>
@@ -10,7 +11,7 @@ const int Channel::kNoneEvent = 0;
 const int Channel::kReadEvent = POLLIN | POLLPRI;
 const int Channel::kWriteEvent = POLLOUT;
 
-Channel::Channel(EventLoop* loop, int fd)
+Channel::Channel(EventLoop *loop, int fd)
   : _loop(loop),
 	_fd(fd),
 	_events(0),
@@ -29,7 +30,7 @@ Channel::~Channel()
 
 void Channel::remove()
 {
-	_loop->removeEvent(this);
+	_loop->removeChannel(this);
 }
 
 void Channel::handleEvent(Timestamp receiveTime)

@@ -5,6 +5,7 @@
 #include <map>
 #include <vector>
 #include <sail/base/noncopyable.h>
+#include <sail/base/timestamp.h>
 
 namespace sail
 {
