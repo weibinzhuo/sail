@@ -45,3 +45,5 @@ inline uint16_t networkToHost16(uint16_t net16)
 }
 
 #endif /*_SAIL_ENDIAN_H*/
+
+

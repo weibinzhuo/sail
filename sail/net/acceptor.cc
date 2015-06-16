@@ -2,15 +2,19 @@
 #include <sail/net/acceptor.h>
 #include <sail/net/socketutil.h>
 #include <sail/net/inetaddr.h>
+#include <sail/net/eventloop.h>
 
 #include <errno.h>
 #include <fcntl.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <unistd.h>
 
 using namespace sail;
 
 Acceptor::Acceptor(EventLoop* loop, const InetAddr &listenAddr, bool reuseport)
 	: _loop(loop),
-	  _acceptSocket(sockets::createNonblocking()),
+	  _acceptSocket(sockets::createNonblockingTcp()),
       _acceptChannel(loop, _acceptSocket.fd()),
       _newConnectionCallback(NULL),
       _listenning(false),
@@ -20,7 +24,7 @@ Acceptor::Acceptor(EventLoop* loop, const InetAddr &listenAddr, bool reuseport)
   	_acceptSocket.setReuseAddr(true);
   	_acceptSocket.setReusePort(reuseport);
   	_acceptSocket.bindAddress(listenAddr);
-  	_acceptChannel.setReadCallback(&Acceptor::handleRead);
+    //_acceptChannel.setReadCallback(&Acceptor::handleRead);
 }
 
 Acceptor::~Acceptor()
@@ -37,7 +41,7 @@ void Acceptor::listen()
   	_acceptChannel.enableReading();
 }
 
-void Acceptor::handleRead()
+void Acceptor::_handleRead()
 {
   	InetAddr peerAddr;
   	int connfd = _acceptSocket.accept(&peerAddr);
@@ -56,7 +60,7 @@ void Acceptor::handleRead()
   	}
   	else
   	{
-    	LOG_SYSERR << "in Acceptor::handleRead";
+    	//aLOG_SYSERR << "in Acceptor::handleRead";
     	// Read the section named "The special problem of
     	// accept()ing when you can't" in libev's doc.
     	// By Marc Lehmann, author of livev.
@@ -69,3 +73,5 @@ void Acceptor::handleRead()
     	}
   	}
 }
+
+

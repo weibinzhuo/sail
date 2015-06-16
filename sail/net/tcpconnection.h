@@ -46,7 +46,7 @@ public:
   	Buffer* inputBuffer() const { return &_inputBuffer; }
  	Buffer* outputBuffer() const { return &_outputBuffer; }
 
- 	void setConnectionCallback(const ConnectionCallback *cb) 
+ 	void setConnectionCallback(const ConnectionCallback *cb)
  	{ _connectionCallback = cb; }
 
   	void setMessageCallback(const MessageCallback *cb)
@@ -57,20 +57,20 @@ public:
 
   	void setHighWaterMarkCallback(const HighWaterMarkCallback *cb, size_t highWaterMark)
   	{
-  		_highWaterMarkCallback = cb; 
-  		_highWaterMark = highWaterMark; 
+  		_highWaterMarkCallback = cb;
+  		_highWaterMark = highWaterMark;
   	}
 
   	// Internal use only.
-  	void setCloseCallback(const CloseCallback *cb) 
+  	void setCloseCallback(const CloseCallback *cb)
   	{ _closeCallback = cb; }
 
 private:
-	enum StateE { 
-		kDisconnected, 
-		kConnecting, 
-		kConnected, 
-		kDisconnecting 
+	enum StateE {
+		kDisconnected,
+		kConnecting,
+		kConnected,
+		kDisconnecting
 	};
 
 	EventLoop *_loop;
@@ -102,3 +102,5 @@ private:
 }
 
 #endif /*_SAIL_TCP_CONNECTION_H*/
+
+

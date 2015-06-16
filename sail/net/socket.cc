@@ -1,6 +1,13 @@
 
 #include <sail/net/socket.h>
 #include <sail/net/inetaddr.h>
+#include <sail/net/socketutil.h>
+
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <strings.h>  // bzero
+
+using namespace sail;
 
 Socket::~Socket()
 {
@@ -17,7 +24,7 @@ void Socket::listen()
 	sockets::listen(_sockfd);
 }
 
-int Socket::accept(InetAdd *peeraddr)
+int Socket::accept(InetAddr *peeraddr)
 {
 	struct sockaddr_in addr;
 	bzero(&addr, sizeof addr);
@@ -66,15 +73,17 @@ void Socket::setKeepAlive(bool on)
                &optval, static_cast<socklen_t>(sizeof optval));
 }
 
-int Socket::setSendTimeout(long long ms) 
+int Socket::setSendTimeout(long long ms)
 {
     struct timeval tv;
     tv.tv_sec = ms/1000;
     tv.tv_usec = (ms%1000)*1000;
-    
+
     if (::setsockopt(_sockfd, SOL_SOCKET, SO_SNDTIMEO, &tv, sizeof(tv)) == -1) {
         //anetSetError(err, "setsockopt SO_SNDTIMEO: %s", strerror(errno));
         return -1;
     }
     return 0;
 }
+
+

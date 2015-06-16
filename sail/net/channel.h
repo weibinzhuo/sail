@@ -2,12 +2,12 @@
 #ifndef _SAIL_CHANNEL_H
 #define _SAIL_CHANNEL_H
 
+#include <sail/base/noncopyable.h>
+
 namespace sail
 {
 
 class EventLoop;
-
-
 
 ///
 /// A selectable I/O channel.
@@ -40,15 +40,18 @@ public:
 
 	bool isNoneEvent() const { return _events == kNoneEvent; }
 
-	void enableReading() { _events |= kReadEvent; update(); }
-	void disableReading() { _events &= ~kReadEvent; update(); }
-	void enableWriting() { _events |= kWriteEvent; update(); }
-	void disableWriting() { _events &= ~kWriteEvent; update(); }
-	void disableAll() { _events = kNoneEvent; update(); }
+	void enableReading() { _events |= kReadEvent; _update(); }
+	void disableReading() { _events &= ~kReadEvent; _update(); }
+	void enableWriting() { _events |= kWriteEvent; _update(); }
+	void disableWriting() { _events &= ~kWriteEvent; _update(); }
+	void disableAll() { _events = kNoneEvent; _update(); }
 	bool isWriting() const { return _events & kWriteEvent; }
 
 	void remove();
 	void handleEvent(Timestamp receiveTime);
+
+private:
+    void _update();
 
 private:
 	static const int kNoneEvent;

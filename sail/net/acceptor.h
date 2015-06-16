@@ -6,21 +6,21 @@
 #include <sail/net/channel.h>
 #include <sail/net/socket.h>
 
-namesapce sail
+namespace sail
 {
 
 class EventLoop;
 class InetAddr;
 
-class Acceptor : public sail::noncopyable
+class Acceptor : public NonCopyable
 {
 public:
-	typedef void NewConnCallback(int sockfd, const InetAdd&);
+	typedef void NewConnCallback(int sockfd, const InetAddr&);
 
 	Acceptor(EventLoop* loop, const InetAddr &listenAddr, bool reuseport);
-  	~Acceptor();
+    ~Acceptor();
 
-  	void setNewConnectionCallback(const NewConnCallback *cb)
+  	void setNewConnectionCallback(NewConnCallback *cb)
   	{ _newConnectionCallback = cb; }
 
   	bool listenning() const { return _listenning; }
@@ -40,3 +40,5 @@ private:
 }
 
 #endif /*_SAIL_ACCEPTOR_H*/
+
+

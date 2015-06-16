@@ -1,6 +1,9 @@
 
 #include <sail/net/channel.h>
 
+#include <poll.h>
+#include <stdlib.h>
+
 using namespace sail;
 
 const int Channel::kNoneEvent = 0;

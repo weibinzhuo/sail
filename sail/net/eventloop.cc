@@ -7,7 +7,7 @@ using namespace sail;
 EventLoop::EventLoop()
   : _quit(false),
   	_eventHandling(false),
-	_poller(Poller::newDefaultPoller(this)) 	
+	_poller(Poller::newDefaultPoller(this))
 {
 
 }
@@ -36,7 +36,7 @@ void EventLoop::loop()
 	    	_processActiveChannels();
 	    }
 
-	    // 
+	    //
 	    if (delta) {
 	    	processExpireTimers();
 	    }
@@ -60,3 +60,5 @@ void EventLoop::_processActiveChannels()
     _currentActiveChannel = NULL;
     _eventHandling = false;
 }
+
+

@@ -3,6 +3,7 @@
 #define _SAIL_EVENTLOOP_H
 
 #include <vector>
+
 #include <sail/base/noncopyable.h>
 #include <sail/base/mutexlock.h>
 
@@ -13,7 +14,7 @@ class Channel;
 class Poller;
 class TimerQueue;
 
-class EventLoop : public sail::NonCopyable
+class EventLoop : public NonCopyable
 {
 public:
 	EventLoop();
@@ -40,3 +41,5 @@ private:
 }
 
 #endif /*_SAIL_EVENTLOOP_H*/
+
+

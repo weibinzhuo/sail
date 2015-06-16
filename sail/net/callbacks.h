@@ -2,6 +2,8 @@
 #ifndef _SAIL_CALLBACKS_H
 #define _SAIL_CALLBACKS_H
 
+#include <stddef.h>
+
 namespace sail
 {
 

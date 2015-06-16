@@ -2,6 +2,11 @@
 #ifndef _SAIL_MUTEX_LOCK_H
 #define _SAIL_MUTEX_LOCK_H
 
+#include <pthread.h>
+
+namespace sail
+{
+
 class MutexLock
 {
 public:
@@ -12,7 +17,7 @@ public:
 
 	~MutexLock()
 	{
-		pthread_mutex_destroy(&_mutex, NULL);
+		pthread_mutex_destroy(&_mutex);
 	}
 
 	void lock()
@@ -45,16 +50,16 @@ class MutexLockGuard
 public:
 	explicit MutexLockGuard(MutexLock &mutex): _mutex(mutex)
 	{
-		mutex.lock();
+		_mutex.lock();
 	}
 
 	~MutexLockGuard()
 	{
-		_mutx.unlock();
+		_mutex.unlock();
 	}
 
 private:
-	MutexLockGuard(cosnt MutexLockGuard&);
+	MutexLockGuard(const MutexLockGuard&);
 	const MutexLockGuard& operator=(const MutexLockGuard&);
 
 private:
@@ -66,5 +71,8 @@ private:
 // A tempory object doesn't hold the lock for long!
 #define MutexLockGuard(x) error "Missing guard object name"
 
+}
 
 #endif /*_SAIL_MUTEX_LOCK_H*/
+
+
